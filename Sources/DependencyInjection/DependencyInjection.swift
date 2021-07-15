@@ -1,17 +1,17 @@
 import Foundation
 
 @propertyWrapper
-struct Injected<Service> {
+public struct Injected<Service> {
     typealias DelayedInjection = () -> Service
 
     var service: Service?
     var delayed: DelayedInjection?
 
-    init() {
+    public init() {
         delayed = { Dependencies.main.resolve() }
     }
 
-    var wrappedValue: Service {
+    public var wrappedValue: Service {
         mutating get {
             if let service = service {
                 return service
